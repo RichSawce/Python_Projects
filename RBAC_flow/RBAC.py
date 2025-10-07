@@ -24,56 +24,86 @@ audit = "2025-10-06T07:12:03Z server1 kernel: [    0.000000] Booting Linux on ph
 "2025-10-06T08:02:41Z server1 sshd[2045]: Accepted publickey for alice from 198.51.100.23 port 54812 ssh2: RSA SHA256:AbCdEfGh..."
 
 
+done = False
 
 #Roles
 def user():
-  print("Would you like to view your account?")
+  print("Type 'view' to view your account?\n" \
+  "'transfer' to transfer money\n" \
+  "'quit' to leave\n")
+  response = input()
   while True:
-   if input() == "yes":
-     print("your account balance:\n $5000")
-     
-   elif input() == "no":
-    print("Would you like to make a transfer?")
-    while True:
-     if input() == "yes": print("sending funds to Bob")
-   
-     elif input() == "no": print("Have a good day!")
-  
-
-     sys.exit()
- 
-   
+   if response == "view":
+     print("\nyour account balance:\n $5000\n")
+     break
+   elif response == "transfer":
+    print("Who would you like to send money to?\n" \
+    "\nBob?\n" \
+    "Alice?\n" \
+    "Xi?\n" \
+    "Marcus?\n")
+   elif response == "quit":
+    print("\nHave a good day!\n")
+    sys.exit()
+   else:
+    print("only 'view', 'transfer' and 'quit' are acceptable")
+    break
+   while True:
+     response = input()
+     if response == "Bob":
+       print("\nsending funds to Bob\n")
+       return
+     elif response == "Alice":
+       print("\nsending funds to Alice\n")
+       return
+     elif response == "Xi":
+       print("\nsending funds to Xi\n")
+       return
+     elif response == "Marcus":
+       print("\nsending funds to Marcus\n")
+       return
+     else:
+       response != "Bob" or "Alice" or "Xi" or "Marcus"
+       print("\nEnter a vaild name\n")
 
 def CS():
   print("Enter the name of the customer to view their account:\n" \
   "Bob, Alice, Xi, Marcus, or type 'exit' to leave")
-  input()
+  response = input()
   while True:
-   if input == "Bob": print(Bob)
-   elif input == "Alice": print(Alice)
-   elif input == "Xi": print(Xi)
-   elif input == "Marcus": print(Marcus)
+   if response == "Bob":
+     print(Bob)
+   elif response == "Alice":
+     print(Alice)
+   elif response == "Xi":
+     print(Xi)
+   elif response == "Marcus":
+     print(Marcus)
    elif "exit": print("Goodbye!")
    sys.exit()
-   break
-  return
+   
 
 def admin():
   print("What would you like to do?\n" \
   "view logs?\n" \
   "update accounts?\n" \
   "manage system?")
+  response = input()
   while True:
-    if input == "view logs": print(audit)
-    elif input == "update accounts": print("accounts updating.....")
-    elif input == "manage system": print("access denied, must be senior admin")
-    elif input != "view logs" or "update accounts" or "manage system":
+    if response == "view logs":
+      print(audit)
+    elif response == "update accounts":
+      print("accounts updating.....")
+    elif response == "manage system":
+      print("access denied, must be senior admin")
+    elif response != "view logs" or "update accounts" or "manage system":
       return
 
 
 
-input("Enter your role:\n")
+print("Enter your role:\n")
 role = "User" or "Customer Service" or "Administrator" or "Auditor"
+response = input()
 while True:
  if role == "User":
    user()
@@ -81,6 +111,4 @@ while True:
    CS("Good day\n")
  elif role == "Administrator":
    admin("Becareful, you got the power!")
-   break
-
 
