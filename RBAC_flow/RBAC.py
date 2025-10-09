@@ -82,10 +82,6 @@ audit_sysadmin = "\n2025-10-06T09:00:00Z server3 kernel: [    0.000000] Booting 
 
 #Roles
 def user():
-  if not mfa():
-    print("Access denided: MFA not confirmed")
-    return
-  
   print("Type 'view' to view your account?\n" \
   "'transfer' to transfer money\n" \
   "'quit' to leave\n")
@@ -126,7 +122,8 @@ def CS():
   "\nBob\n" \
     "Alice\n" \
     "Xi\n" \
-    "Marcus\n")
+    "Marcus\n" \
+    "or 'exit' to leave.")
   response = input()
   while True:
    if response == "Bob":
@@ -144,6 +141,10 @@ def CS():
    elif response == "exit":
      print("\nGoodbye!")
      sys.exit()
+   else:
+       response not in ("Bob", "Alice", "Xi", "Marcus", "exit")
+       print("\nEnter a vaild name\n")
+       return
   
    
 
@@ -255,7 +256,8 @@ def mfa():
      return True
    print("Incorrect code. Try again? y/n")
    if input() != 'y':
-     return True
+     continue
+   
   
 
 
@@ -268,13 +270,21 @@ print("Enter your role:\n" \
 response = input()
 while True:
  if response == "User":
-   user()
+   mfa ()
+   while True:
+    user()
  elif response == "Customer Service":
-   CS()
+   mfa ()
+   while True:
+    CS()
  elif response == "Administrator":
-   admin()
+   mfa ()
+   while True:
+    admin()
  elif response == "Auditor":
-   auditor()
+   mfa ()
+   while True:
+    auditor()
  elif response == "Exit":
    print("Logging out.....")
    sys.exit()
