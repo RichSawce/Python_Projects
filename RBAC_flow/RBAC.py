@@ -1,3 +1,4 @@
+import random 
 import sys
 
 #User Accounts
@@ -81,11 +82,15 @@ audit_sysadmin = "\n2025-10-06T09:00:00Z server3 kernel: [    0.000000] Booting 
 
 #Roles
 def user():
+  if not mfa():
+    print("Access denided: MFA not confirmed")
+    return
+  
   print("Type 'view' to view your account?\n" \
   "'transfer' to transfer money\n" \
   "'quit' to leave\n")
-  response = input()
   while True:
+   response = input()
    if response == "view":
      print("\nyour account balance:\n $5000\n")
      break
@@ -214,6 +219,44 @@ def auditor():
     else:
       print("Enter valid command")
       return
+#login sim   
+def login():
+  print("enter your password or type 'exit' to leave")
+  response = input()
+  while True:
+   if response == "asdf1234":
+    user()
+   elif response == "hello":
+    CS()
+   elif response == "098765":
+    admin()
+   elif response == "zxcvb":
+    auditor()
+   elif response == "exit":
+    print("Logging out.....")
+    sys.exit()
+   else:
+    print("incorrect password")
+    response = input()
+    continue
+   
+#MFA sim  
+def mfa():
+  while True:
+   send = random.randint(0,1) == 1
+   if not send:
+     print("MFA not received, try again? y/n")
+     if input() == 'y':
+       continue
+     return False
+   code = str(random.randint(1000,9999))
+   print("MFA code sent: " + code + " Enter code to confirm:")
+   if input() == code:
+     return True
+   print("Incorrect code. Try again? y/n")
+   if input() != 'y':
+     return True
+  
 
 
 print("Enter your role:\n" \
@@ -232,12 +275,13 @@ while True:
    admin()
  elif response == "Auditor":
    auditor()
- elif response not in ("User", "Customer Service", "Administrator", "Auditor", "Exit"):
-   print("Not a valid role")
-   break
  elif response == "Exit":
    print("Logging out.....")
    sys.exit()
- 
+ else:
+   print("Not a valid role")
+   response = input()
+   continue
+
 
 
