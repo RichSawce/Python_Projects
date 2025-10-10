@@ -231,13 +231,17 @@ def login():
     response = input()
     while True:
         if response == "asdf1234":
-            user()
+            mfa()
+            while True: user()
         elif response == "hello":
-            CS()
+            mfa()
+            while True:CS()
         elif response == "098765":
-            admin()
+            mfa()
+            while True:admin()
         elif response == "zxcvb":
-            auditor()
+            mfa()
+            while True:auditor()
         elif response == "exit":
             print("Logging out.....")
             sys.exit()
@@ -293,20 +297,28 @@ print("Enter your role:\n"
 response = input()
 while True:
     if response == "User":
-        mfa()
+        login()
         while True:
+         mfa()
+         while True:
             user()
     elif response == "Customer Service":
-        mfa()
+        login()
         while True:
+         mfa()
+         while True:
             CS()
     elif response == "Administrator":
-        mfa()
+        login()
         while True:
+         mfa()
+         while True:
             admin()
     elif response == "Auditor":
-        mfa()
+        login()
         while True:
+         mfa()
+         while True:
             auditor()
     elif response == "Exit":
         print("Logging out.....")
@@ -315,5 +327,4 @@ while True:
         print("Not a valid role")
         response = input()
         continue
-
 
