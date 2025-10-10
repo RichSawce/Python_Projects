@@ -254,29 +254,34 @@ def mfa():
         send = random.randint(0, 1) == 1
         if not send:
             print("MFA not received, try again? y/n")
-            if response != 'y' or 'n':
-                continue
-            elif response == 'y':
-                send = 1
-                continue
-            else:
-                response == 'n'
-                print("Logging out.....")
-                sys.exit()
+            while True:
+                response = input()
+                if response == "y":
+                    break
+                elif response == "n":
+                    print("\nLogging out....\n")
+                    sys.exit()
+                    return
+                else:
+                    response not in ("y", "n")
+                    print("\nmust enter 'y' or 'n'\n")
         code = str(random.randint(1000, 9999))
         print("MFA code sent: " + code + " Enter code to confirm:")
-        if input() == code:
+        if input("") == code:
             return True
-        print("Incorrect code. Try again? y/n")
-        if response != 'y' or 'n':
-            continue
-        elif response == 'y':
-            send = 1
-            continue
-        elif response == 'n':
-            print("Logging out.....")
-            sys.exit()
-            break
+        if input() != code:
+            print("Incorrect code. Try again? y/n bottom")
+            while True:
+                response = input()
+                if response == "y":
+                    break
+                elif response == "n":
+                    print("\nLogging out....\n")
+                    sys.exit()
+                    return
+                else:
+                    response not in ("y", "n")
+                    print("\nmust enter 'y' or 'n' bottom\n")
 
 
 print("Enter your role:\n"
@@ -284,7 +289,7 @@ print("Enter your role:\n"
       "Customer Service\n"
       "Administrator\n"
       "Auditor\n"
-      "Exit")
+      "Exit\n")
 response = input()
 while True:
     if response == "User":
