@@ -153,7 +153,7 @@ def CS():
 def admin():
     print("What would you like to do?\n"
           "\nview logs?\n"
-          "update accounts?\n"
+          "update system config?\n"
           "manage system?\n"
           "exit")
     response = input()
@@ -269,7 +269,7 @@ def mfa():
         print("MFA code sent: " + code + " Enter code to confirm:")
         if input("") == code:
             return True
-        if input() != code:
+        else:
             print("Incorrect code. Try again? y/n bottom")
             while True:
                 response = input()
@@ -315,6 +315,5 @@ while True:
         print("Not a valid role")
         response = input()
         continue
-
 
 
