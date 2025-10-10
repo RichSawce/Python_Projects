@@ -254,13 +254,13 @@ def mfa():
         send = random.randint(0, 1) == 1
         if not send:
             print("MFA not received, try again? y/n")
-            if input() != 'y' or 'n':
+            if response != 'y' or 'n':
                 continue
-            elif input() == 'y':
+            elif response == 'y':
                 send = 1
                 continue
             else:
-                input() == 'n'
+                response == 'n'
                 print("Logging out.....")
                 sys.exit()
         code = str(random.randint(1000, 9999))
@@ -268,12 +268,12 @@ def mfa():
         if input() == code:
             return True
         print("Incorrect code. Try again? y/n")
-        if input() != 'y' or 'n':
+        if response != 'y' or 'n':
             continue
-        elif input() == 'y':
+        elif response == 'y':
             send = 1
             continue
-        elif input() == 'n':
+        elif response == 'n':
             print("Logging out.....")
             sys.exit()
             break
