@@ -1,0 +1,81 @@
+RBAC Console Simulation (Python) — Login + MFA Enabled
+
+A simple Role-Based Access Control (RBAC) console app in Python.
+This version enables both password login and MFA before granting access to a role-specific menu.
+
+What it does
+	•	Prompts for a role and then for login (passwords below).
+	•	Runs a basic MFA flow: a random 4-digit code is “sent” and must be entered.
+	•	After login+MFA, opens a menu based on your role:
+	•	User: view balance; prototype transfer prompt
+	•	Customer Service: view Bob/Alice/Xi/Marcus profiles
+	•	Administrator: view global audit logs; placeholders for config/system
+	•	Auditor: view per-user logs, Customer Service logs, or Admin logs
+	•	Includes several fake audit log strings (SSH, sudo, cron, nginx, fail2ban, etc.) for realism.
+
+Quick start
+
+Requirements: Python 3.8+
+Run:
+
+python rbac_sim.py
+
+Login (demo passwords)
+
+When prompted by login():
+
+Role: User
+Password: asdf1234
+Role: Customer Service
+Password: hello
+Role: Administrator
+Password: 098765
+Role: Auditor
+Password: zxcvb
+To exit: exit
+
+After a correct password, you must also pass MFA (a printed 4-digit code).
+
+MFA flow (demo)
+	•	The script may say “MFA not received, try again? y/n” (randomized); choose y to retry or n to quit.
+	•	If sent, you’ll see MFA code sent: 1234 Enter code to confirm:
+Type the same 4-digit code to proceed.
+
+Menus (at a glance)
+
+User
+view        # prints a sample balance
+transfer    # prompts for recipient (prototype)
+quit        # exits
+
+Customer Service
+Bob | Alice | Xi | Marcus   # prints the selected profile
+exit                         # quits
+
+Administrator
+view logs            # prints global log block
+update system config # placeholder action
+manage system        # access denied (demo)
+exit                 # quits
+
+Auditor
+User logs  # then choose Bob/Alice/Xi/Marcus
+CS logs    # customer service logs
+Admin logs # sysadmin logs
+exit       # quits
+
+Notes & limitations
+	•	Educational demo only: credentials and data are hard-coded; MFA is simulated.
+	•	Inputs are case-sensitive; use the exact strings shown in the menus.
+	•	Some flows (e.g., User → transfer) are prototypes and print confirmations only.
+	•	The main loop nests role selection, login, and MFA; exiting a role generally ends the program.
+
+Files / data in this script
+	•	Users: Bob, Alice, Xi, Marcus (name/DOB/balance strings)
+	•	Logs: audit, audit_alice, audit_bob, audit_xi, audit_marcus, audit_custserv, audit_sysadmin
+	•	Core functions: login(), mfa(), user(), CS(), admin(), auditor()
+
+License
+
+Free for learning and demonstrations. Not for production use.
+
