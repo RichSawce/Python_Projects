@@ -81,6 +81,7 @@ audit_sysadmin = "\n2025-10-06T09:00:00Z server3 kernel: [    0.000000] Booting 
     "2025-10-06T09:04:13Z server3 systemd[1]: Restarted nginx web server.\n"
 
 # Roles
+role = ("User" or "Customer Service" or "Administrator" or "Auditor" or "Exit")
 
 
 def user():
@@ -162,7 +163,7 @@ def admin():
             print(audit)
             return
         elif response == "update system config":
-            print("\naccounts updating.....\n")
+            print("\nupdating, this may take a while.....\n")
             return
         elif response == "manage system":
             print("\naccess denied, must be senior admin\n")
@@ -227,26 +228,31 @@ def auditor():
 
 
 def login():
-    print("enter your password or type 'exit' to leave")
+    print("\nenter your password or type 'exit' to leave\n")
     response = input()
     while True:
-        if response == "asdf1234":
+        if response == "asdf1234" and role == "User":
             mfa()
-            while True: user()
-        elif response == "hello":
+            while True:
+                user()
+        if response == "hello" and role == "Customer Service":
             mfa()
-            while True:CS()
-        elif response == "098765":
+            while True:
+                CS()
+        if response == "098765" and role == "Administrator":
             mfa()
-            while True:admin()
-        elif response == "zxcvb":
+            while True:
+                admin()
+        if response == "zxcvb" and role == "Auditor":
             mfa()
-            while True:auditor()
+            while True:
+                auditor()
         elif response == "exit":
             print("Logging out.....")
             sys.exit()
         else:
-            print("incorrect password")
+            print("\nincorrect password\n"
+                  "\nenter correct password or 'exit' to leave\n")
             response = input()
             continue
 
@@ -294,37 +300,36 @@ print("Enter your role:\n"
       "Administrator\n"
       "Auditor\n"
       "Exit\n")
-response = input()
+role = input()
 while True:
-    if response == "User":
+    if role == "User":
         login()
         while True:
-         mfa()
-         while True:
-            user()
-    elif response == "Customer Service":
+            mfa()
+            while True:
+                user()
+    if role == "Customer Service":
         login()
         while True:
-         mfa()
-         while True:
-            CS()
-    elif response == "Administrator":
+            mfa()
+            while True:
+                CS()
+    if role == "Administrator":
         login()
         while True:
-         mfa()
-         while True:
-            admin()
-    elif response == "Auditor":
+            mfa()
+            while True:
+                admin()
+    if role == "Auditor":
         login()
         while True:
-         mfa()
-         while True:
-            auditor()
-    elif response == "Exit":
+            mfa()
+            while True:
+                auditor()
+    elif role == "Exit":
         print("Logging out.....")
         sys.exit()
     else:
         print("Not a valid role")
-        response = input()
+        role = input()
         continue
-
