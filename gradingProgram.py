@@ -1,4 +1,6 @@
 grades = []
+names = []
+
 
 print("Welcome to the Grade Calculator!")
 while True:
@@ -6,6 +8,9 @@ while True:
  answer = input()
 
  if answer.lower() == "yes":
+   print("enter your name: ")
+   name = input()
+   names.append(name)
    print("enter your grade: ")
    try:
         score = float(input())
@@ -46,7 +51,10 @@ while True:
         print("Would you like to see all your grades? (yes/no) ")
         response = input()
         if response.lower() == "yes":
-            print("Your grades are: " + str(grades))
+            print("Grades Summary:")
+            for i in range(len(grades)) and range(len(names)):
+             
+             print((str(names[i]) + " " +str(grades[i])))
             break
 
         else:
